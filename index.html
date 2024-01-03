@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <title>Wallet App</title>
+</head>
+<body>
+  <!------------- Modal start ------------------------------->
+   <div class="modal fade bg-light" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+        </div>
+        <div class="modal-body">
+            <form id="form-enter">
+                <div class="mb-3">
+                  <label for="user" class="form-label">F.I.O</label>
+                  <input type="text" class="form-control" placeholder="F.I.O kiriting" id="user" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="all-money" class="form-label">Summa</label>
+                  <input type="text" class="form-control" placeholder="Summani kiriting!" id="all-money">
+                </div>
+                <button type="button" class="btn btn-primary w-100" id="enter-btn">Kirish</button>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!------------- Modal end ------------------------------->
+  <div class="container">
+      <div class="row mt-5">
+          <div class="col-5">
+            <div class="list-group shadow-sm">
+                <div class="list-group-item list-group-item-action active p-3" aria-current="true">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h3 class="mb-3 user-name"></h3>
+                    <small class="badge bg-info align-self-start enter-date"></small>
+                  </div>
+                  <p class="mb-1 h5">Hisobingiz: <span class="user-money">0</span></p>
+                  <small>Hamyoningiz doimo pulga to'la bo'lsin!</small>
+                </div>
+                <div class="p-3">
+                    <form class="add-infoForm">
+                        <div class="mb-3 form-floating">
+                          <input type="text" class="form-control" placeholder="Summani kiriting" id="change-money" aria-describedby="emailHelp">
+                          <label for="change-money" class="form-label">Summa</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <select class="form-select" aria-label="Default select example" id="type-money">
+                                <option value="earning">Daromad</option>
+                                <option value="outlay">Harajat</option>
+                            </select>
+                            <label for="type-money">Tanlang daromad yoki harajat</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <textarea class="form-control" id="comment" placeholder="Izoh..." rows="3"></textarea>
+                            <label for="comment" class="form-label">Izoh</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="add">Saqlash</button>
+                    </form>
+                </div>
+            </div>
+          </div>
+          <div class="col-7">
+            <div class="list-group shadow-sm">
+                <div class="list-group-item list-group-item border-0 bg-light p-3" aria-current="true">
+                  <div class="d-flex w-100 justify-content-between align-items-center">
+                    <h3 class="mb-3">Monitoring</h3>
+                  </div>
+                  <small>Daromad va harajatlaringizni doimo nazorat qiling!</small>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex justify-content-between align-items-center mt-3" id="monitoring">
+                        <a href="#" id="filter-all" class="filters d-flex me-3 justify-content-between align-items-center">
+                          <i class="bi  bi-arrow-down-up d-inline-block me-2 bg-primary text-white rounded"></i>
+                          <div>
+                            <p class="m-0 text-primary all-account">0</p>
+                            <span class="money-comment">Barchasi</span>
+                          </div>
+                        </a>
+                        <a href="#" id="filter-earning" class="filters d-flex me-3 justify-content-between align-items-center">
+                          <i class="bi bi-arrow-down d-inline-block me-2 bg-success text-white rounded"></i>
+                          <div>
+                            <p class="account-earning m-0 text-success">0</p>
+                            <span class="money-comment">Kirim</span>
+                          </div>
+                        </a>
+                        <a href="#" id="filter-outlay" class="filters d-flex me-3 justify-content-between align-items-center">
+                          <i class="bi bi-arrow-up d-inline-block me-2 bg-warning text-white rounded"></i>
+                          <div>
+                            <p class="account-outlay m-0 text-warning">0</p>
+                            <span class="money-comment">Chiqim</span>
+                          </div>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center">
+                      <div class="form-check me-3">
+                        <input class="form-check-input" type="checkbox" value="" id="all-check">
+                        <label class="form-check-label" for="flexCheckChecked">
+                          Barchasi
+                        </label>
+                      </div>
+                      <button type="button" class="btn btn-danger" id="check-delete">O'chirish</button>
+                    </div>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center pt-4">
+                    <p class="h5 money-list-date"></p>
+                    <div>
+                      <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="#" class="text-success text-decoration-none money-list-earning">+ 0</a></li>
+                          <li class="breadcrumb-item"><a href="#" class="text-danger text-decoration-none money-list-outlay">- 0</a></li>
+                        </ol>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <ul class="list-group list-group-flush money-list"></ul>
+                </div>
+            </div> 
+          </div>
+      </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+  <script src="wallet.js"></script>
+</body>
+</html>
